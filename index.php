@@ -8,12 +8,8 @@ error_reporting(0);
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="keywords" content="">
-<meta name="description" content="">
-<title>Car</title>
+
+<title>Car Sales/Rental Portal</title>
 <!--Bootstrap -->
 <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css">
 <link rel="stylesheet" href="assets/css/style.css" type="text/css">
@@ -53,8 +49,9 @@ error_reporting(0);
       <div class="row">
         <div class="col-md-5 col-md-push-7">
           <div class="banner_content">
-            <h1>Find the ideal car for you.</h1>
-            <p>We have more cars for you to choose. </p>
+            <h1>&nbsp;</h1>
+            <p>&nbsp; </p>
+            </div>
         </div>
       </div>
     </div>
@@ -67,8 +64,8 @@ error_reporting(0);
 <section class="section-padding gray-bg">
   <div class="container">
     <div class="section-header text-center">
-      <h2>Find the Best <span>Car For You</span></h2>
-      <p>It is above all the uncompromising, performance-oriented aesthetic that unmistakeably reveals its ambitions. Not elegant but extravagant. Not conventional but individual.</p>
+      <h2>Find the Best <span>CarForYou</span></h2>
+      <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
     </div>
     <div class="row"> 
       
@@ -82,7 +79,7 @@ error_reporting(0);
       <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="resentnewcar">
 
-<?php $sql = "SELECT tblvehicles.VehiclesTitle,tblbrands.BrandName,tblvehicles.PricePerDay,tblvehicles.FuelType,tblvehicles.ModelYear,tblvehicles.id,tblvehicles.SeatingCapacity,tblvehicles.VehiclesOverview,tblvehicles.Vimage1 from tblvehicles join tblbrands on tblbrands.id=tblvehicles.VehiclesBrand";
+<?php $sql = "SELECT tblvehicles.VehiclesTitle,tblbrands.BrandName,tblvehicles.PricePerDay,tblvehicles.FuelType,tblvehicles.ModelYear,tblvehicles.id,tblvehicles.SeatingCapacity,tblvehicles.VehiclesOverview,tblvehicles.Vimage1 from tblvehicles join tblbrands on tblbrands.id=tblvehicles.VehiclesBrand limit 9";
 $query = $dbh -> prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -94,22 +91,35 @@ foreach($results as $result)
 ?>  
 
 <div class="col-list-3">
-<div class="recent-car-list">
-<div class="car-info-box"> <a href="vehical-details.php?vhid=<?php echo htmlentities($result->id);?>"><img src="admin/img/vehicleimages/<?php echo htmlentities($result->Vimage1);?>" class="img-responsive" alt="image"></a>
-<ul>
-<li><i class="fa fa-car" aria-hidden="true"></i><?php echo htmlentities($result->FuelType);?></li>
-<li><i class="fa fa-calendar" aria-hidden="true"></i><?php echo htmlentities($result->ModelYear);?> Model</li>
-<li><i class="fa fa-user" aria-hidden="true"></i><?php echo htmlentities($result->SeatingCapacity);?> seats</li>
-</ul>
-</div>
-<div class="car-title-m">
-<h6><a href="vehical-details.php?vhid=<?php echo htmlentities($result->id);?>"><?php echo htmlentities($result->BrandName);?> , <?php echo htmlentities($result->VehiclesTitle);?></a></h6>
-<span class="price">$<?php echo htmlentities($result->PricePerDay);?> /Day</span> 
-</div>
-<div class="inventory_info_m">
-<p><?php echo substr($result->VehiclesOverview,0,70);?></p>
-</div>
-</div>
+  <div class="recent-car-list">
+    <div class="car-info-box"> 
+
+      <div class="card-image">
+        <a href="#">
+          <div class="content-overlay"></div>
+          <img src="admin/img/vehicleimages/<?php echo htmlentities($result->Vimage1);?>" class="img-responsive" alt="image">
+          <div class="content-details fadeIn-bottom">
+            <a href="car-details.php?vhid=<?php echo htmlentities($result->id);?>" class="btn btn-outline-primary btn-sm"><i class="fa fa-cart-check"></i> Buy</a>&nbsp;&nbsp;&nbsp;
+            <a href="vehical-details.php?vhid=<?php echo htmlentities($result->id);?>" class="btn btn-outline-secondary btn-sm"><i class="fa fa-key"></i> Rent</a>
+          </div>
+        </a>
+      </div>
+
+      <ul>
+      <li><i class="fa fa-car" aria-hidden="true"></i><?php echo htmlentities($result->FuelType);?></li>
+      <li><i class="fa fa-calendar" aria-hidden="true"></i><?php echo htmlentities($result->ModelYear);?> Model</li>
+      <li><i class="fa fa-user" aria-hidden="true"></i><?php echo htmlentities($result->SeatingCapacity);?> seats</li>
+      </ul>
+
+    </div>
+  <div class="car-title-m">
+    <h6><a href="#"> <?php echo htmlentities($result->VehiclesTitle);?></a></h6>
+    <span class="price">$<?php echo htmlentities($result->PricePerDay);?> /Day</span> 
+  </div>
+    <div class="inventory_info_m">
+    <p><?php echo substr($result->VehiclesOverview,0,70);?></p>
+    </div>
+  </div>
 </div>
 <?php }}?>
        
@@ -173,7 +183,7 @@ foreach($results as $result)
       <div id="testimonial-slider">
 <?php 
 $tid=1;
-$sql = "SELECT tbltestimonial.Testimonial,tblusers.FullName from tbltestimonial join tblusers on tbltestimonial.UserEmail=tblusers.EmailId where tbltestimonial.status=:tid";
+$sql = "SELECT tbltestimonial.Testimonial,tblusers.FullName from tbltestimonial join tblusers on tbltestimonial.UserEmail=tblusers.EmailId where tbltestimonial.status=:tid limit 4";
 $query = $dbh -> prepare($sql);
 $query->bindParam(':tid',$tid, PDO::PARAM_STR);
 $query->execute();
@@ -186,7 +196,7 @@ foreach($results as $result)
 
 
         <div class="testimonial-m">
-          <div class="testimonial-img"> <img src="assets/images/cat-profile.png" alt="" /> </div>
+ 
           <div class="testimonial-content">
             <div class="testimonial-heading">
               <h5><?php echo htmlentities($result->FullName);?></h5>

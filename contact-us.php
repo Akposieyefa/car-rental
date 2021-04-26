@@ -30,12 +30,8 @@ $error="Something went wrong. Please try again";
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="keywords" content="">
-<meta name="description" content="">
-<title>CarForYou - Responsive Car Dealer HTML5 Template</title>
+
+<title>Car Rental|| Contact Us Page</title>
 <!--Bootstrap -->
 <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css">
 <!--Custome Style -->
@@ -87,7 +83,7 @@ $error="Something went wrong. Please try again";
 </head>
 <body>
 
-<!-- Start Switcher -->
+<<!-- Start Switcher -->
 <?php include('includes/colorswitcher.php');?>
 <!-- /Switcher -->  
         
@@ -133,7 +129,7 @@ $error="Something went wrong. Please try again";
             </div>
             <div class="form-group">
               <label class="control-label">Phone Number <span>*</span></label>
-              <input type="text" name="contactno" class="form-control white_bg" id="phonenumber" required>
+              <input type="text" name="contactno" class="form-control white_bg" id="phonenumber" required maxlength="10" pattern="[0-9]+">
             </div>
             <div class="form-group">
               <label class="control-label">Message <span>*</span></label>

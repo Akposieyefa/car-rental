@@ -8,7 +8,7 @@ if(strlen($_SESSION['login'])==0)
 header('location:index.php');
 }
 else{
-if(isset($_POST['update']))
+if(isset($_POST['updatepass']))
   {
 $password=md5($_POST['password']);
 $newpassword=md5($_POST['newpassword']);
@@ -37,12 +37,8 @@ $error="Your current password is wrong";
   <!DOCTYPE HTML>
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="keywords" content="">
-<meta name="description" content="">
-<title>CarForYou - Responsive Car Dealer HTML5 Template</title>
+
+<title>Car Rental Portal - Update Password</title>
 <!--Bootstrap -->
 <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css">
 <!--Custome Style -->
@@ -183,7 +179,7 @@ foreach($results as $result)
             </div>
           
             <div class="form-group">
-               <input type="submit" value="Update" name="update" id="submit" class="btn btn-block">
+               <input type="submit" value="Update" name="updatepass" id="submit" class="btn btn-block">
             </div>
           </form>
         </div>
@@ -210,6 +206,9 @@ foreach($results as $result)
 
 <!--/Register-Form --> 
 
+<!--Forgot-password-Form -->
+<?php include('includes/forgotpassword.php');?>
+<!--/Forgot-password-Form --> 
 
 <!-- Scripts --> 
 <script src="assets/js/jquery.min.js"></script>

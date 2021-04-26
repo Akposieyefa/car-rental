@@ -16,7 +16,6 @@ $vehicleoverview=$_POST['vehicalorcview'];
 $priceperday=$_POST['priceperday'];
 $fueltype=$_POST['fueltype'];
 $modelyear=$_POST['modelyear'];
-$sellingprize = $_POST['sellingprize'];
 $seatingcapacity=$_POST['seatingcapacity'];
 $vimage1=$_FILES["img1"]["name"];
 $vimage2=$_FILES["img2"]["name"];
@@ -41,13 +40,12 @@ move_uploaded_file($_FILES["img3"]["tmp_name"],"img/vehicleimages/".$_FILES["img
 move_uploaded_file($_FILES["img4"]["tmp_name"],"img/vehicleimages/".$_FILES["img4"]["name"]);
 move_uploaded_file($_FILES["img5"]["tmp_name"],"img/vehicleimages/".$_FILES["img5"]["name"]);
 
-$sql="INSERT INTO tblvehicles(VehiclesTitle,VehiclesBrand,VehiclesOverview,PricePerDay,sellingprize,FuelType,ModelYear,SeatingCapacity,Vimage1,Vimage2,Vimage3,Vimage4,Vimage5,AirConditioner,PowerDoorLocks,AntiLockBrakingSystem,BrakeAssist,PowerSteering,DriverAirbag,PassengerAirbag,PowerWindows,CDPlayer,CentralLocking,CrashSensor,LeatherSeats) VALUES(:vehicletitle,:brand,:vehicleoverview,:priceperday,:sellingprize,:fueltype,:modelyear,:seatingcapacity,:vimage1,:vimage2,:vimage3,:vimage4,:vimage5,:airconditioner,:powerdoorlocks,:antilockbrakingsys,:brakeassist,:powersteering,:driverairbag,:passengerairbag,:powerwindow,:cdplayer,:centrallocking,:crashcensor,:leatherseats)";
+$sql="INSERT INTO tblvehicles(VehiclesTitle,VehiclesBrand,VehiclesOverview,PricePerDay,FuelType,ModelYear,SeatingCapacity,Vimage1,Vimage2,Vimage3,Vimage4,Vimage5,AirConditioner,PowerDoorLocks,AntiLockBrakingSystem,BrakeAssist,PowerSteering,DriverAirbag,PassengerAirbag,PowerWindows,CDPlayer,CentralLocking,CrashSensor,LeatherSeats) VALUES(:vehicletitle,:brand,:vehicleoverview,:priceperday,:fueltype,:modelyear,:seatingcapacity,:vimage1,:vimage2,:vimage3,:vimage4,:vimage5,:airconditioner,:powerdoorlocks,:antilockbrakingsys,:brakeassist,:powersteering,:driverairbag,:passengerairbag,:powerwindow,:cdplayer,:centrallocking,:crashcensor,:leatherseats)";
 $query = $dbh->prepare($sql);
 $query->bindParam(':vehicletitle',$vehicletitle,PDO::PARAM_STR);
 $query->bindParam(':brand',$brand,PDO::PARAM_STR);
 $query->bindParam(':vehicleoverview',$vehicleoverview,PDO::PARAM_STR);
 $query->bindParam(':priceperday',$priceperday,PDO::PARAM_STR);
-$query->bindParam(':sellingprize',$sellingprize,PDO::PARAM_STR);
 $query->bindParam(':fueltype',$fueltype,PDO::PARAM_STR);
 $query->bindParam(':modelyear',$modelyear,PDO::PARAM_STR);
 $query->bindParam(':seatingcapacity',$seatingcapacity,PDO::PARAM_STR);
@@ -216,15 +214,6 @@ foreach($results as $result)
 <input type="text" name="seatingcapacity" class="form-control" required>
 </div>
 </div>
-
-
-<div class="form-group">
-<label class="col-sm-2 control-label">Selling Prize<span style="color:red">*</span></label>
-<div class="col-sm-4">
-<input type="text" name="sellingprize" class="form-control" required>
-</div>
-
-
 <div class="hr-dashed"></div>
 
 

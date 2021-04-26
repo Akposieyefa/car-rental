@@ -189,7 +189,7 @@ continue;
 <label class="col-sm-2 control-label">Select Fuel Type<span style="color:red">*</span></label>
 <div class="col-sm-4">
 <select class="selectpicker" name="fueltype" required>
-<option value="<?php echo htmlentities($results->FuelType);?>"> <?php echo htmlentities($result->FuelType);?> </option>
+<option value="<?php echo htmlentities($result->FuelType);?>"> <?php echo htmlentities($result->FuelType);?> </option>
 
 <option value="Petrol">Petrol</option>
 <option value="Diesel">Diesel</option>
@@ -456,7 +456,7 @@ echo htmlentities("File not available");
 											<div class="form-group">
 												<div class="col-sm-8 col-sm-offset-2" >
 													
-													<button class="btn btn-primary" name="submit" type="submit" style="margin-top:4%">Save changes</button>
+<button class="btn btn-primary" name="submit" type="submit" style="margin-top:4%">Save changes</button>
 												</div>
 											</div>
 

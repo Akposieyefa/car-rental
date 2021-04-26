@@ -11,21 +11,40 @@
 </ul>
 </li>
 
-<li><a href="#"><i class="fa fa-sitemap"></i> Vehicles</a>
+<li><a href="#"><i class="fa fa-car"></i> Vehicles</a>
 					<ul>
 						<li><a href="post-avehical.php">Post a Vehicle</a></li>
 						<li><a href="manage-vehicles.php">Manage Vehicles</a></li>
 					</ul>
 				</li>
-				<li><a href="manage-bookings.php"><i class="fa fa-users"></i> Manage Booking</a></li>
+
+<li><a href="#"><i class="fa fa-sitemap"></i> Bookings</a>
+					<ul>
+						<li><a href="new-bookings.php">New</a></li>
+						<li><a href="confirmed-bookings.php">Confirmed</a></li>
+						<li><a href="canceled-bookings.php">Canceled</a></li>
+					</ul>
+				</li>
+
+<li><a href="#"><i class="fa fa-shopping-cart"></i> Purchases</a>
+					<ul>
+						<li><a href="new-purchases.php">New</a></li>
+						<li><a href="confirmed-purchases.php">Confirmed</a></li>
+						<li><a href="canceled-purchase.php">Canceled</a></li>
+					</ul>
+				</li>
+
+		
 
 				<li><a href="testimonials.php"><i class="fa fa-table"></i> Manage Testimonials</a></li>
-				<li><a href="manage-contactusquery.php"><i class="fa fa-desktop"></i> Manage Contact Us Query</a></li>
+				<li><a href="manage-conactusquery.php"><i class="fa fa-desktop"></i> Manage Conatctus Query</a></li>
 				<li><a href="reg-users.php"><i class="fa fa-users"></i> Reg Users</a></li>
 			<li><a href="manage-pages.php"><i class="fa fa-files-o"></i> Manage Pages</a></li>
 			<li><a href="update-contactinfo.php"><i class="fa fa-files-o"></i> Update Contact Info</a></li>
 
 			<li><a href="manage-subscribers.php"><i class="fa fa-table"></i> Manage Subscribers</a></li>
+
+			<li><a href="manage-apis.php"><i class="fa fa-key"></i> Manage API settings</a></li>
 
 			</ul>
 		</nav>

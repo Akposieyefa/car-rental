@@ -7,11 +7,7 @@ error_reporting(0);
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="keywords" content="">
-<meta name="description" content="">
+
 <title>Car Rental Portal | Car Listing</title>
 <!--Bootstrap -->
 <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css">
@@ -132,10 +128,10 @@ foreach($results as $result)
             <h5><i class="fa fa-filter" aria-hidden="true"></i> Find Your  Car </h5>
           </div>
           <div class="sidebar_filter">
-          <form action="search-carresult.php" method="post">
+            <form action="#" method="get">
               <div class="form-group select">
-              <select class="form-control" name="brand">
-              <option>Select Brand</option>
+                <select class="form-control">
+                  <option>Select Brand</option>
 
                   <?php $sql = "SELECT * from  tblbrands ";
 $query = $dbh -> prepare($sql);
@@ -152,8 +148,8 @@ foreach($results as $result)
                 </select>
               </div>
               <div class="form-group select">
-              <select class="form-control" name="fueltype">
-              <option>Select Fuel Type</option>
+                <select class="form-control">
+                  <option>Select Fuel Type</option>
 <option value="Petrol">Petrol</option>
 <option value="Diesel">Diesel</option>
 <option value="CNG">CNG</option>

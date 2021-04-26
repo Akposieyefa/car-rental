@@ -94,7 +94,7 @@ $error="Something went wrong. Please try again";
 						<div class="row">
 							<div class="col-md-10">
 								<div class="panel panel-default">
-									<div class="panel-heading">Form fields</div>
+									<div class="panel-heading">Create Brand</div>
 									<div class="panel-body">
 										<form method="post" name="chngpwd" class="form-horizontal" onSubmit="return valid();">
 										

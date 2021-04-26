@@ -19,7 +19,7 @@ $query->bindParam(':id',$id,PDO::PARAM_STR);
 $query->execute();
 $lastInsertId = $dbh->lastInsertId();
 
-$msg="Brand updted successfully";
+$msg="Brand Update successfully";
 
 }
 ?>
@@ -35,7 +35,7 @@ $msg="Brand updted successfully";
 	<meta name="author" content="">
 	<meta name="theme-color" content="#3e454c">
 	
-	<title>Car Rental Portal | Admin Create Brand</title>
+	<title>Car Rental Portal | Admin Update Brand</title>
 
 	<!-- Font awesome -->
 	<link rel="stylesheet" href="css/font-awesome.min.css">
@@ -85,12 +85,12 @@ $msg="Brand updted successfully";
 				<div class="row">
 					<div class="col-md-12">
 					
-						<h2 class="page-title">Create Brand</h2>
+						<h2 class="page-title">Update Brand</h2>
 
 						<div class="row">
 							<div class="col-md-10">
 								<div class="panel panel-default">
-									<div class="panel-heading">Form fields</div>
+									<div class="panel-heading">Update Brand</div>
 									<div class="panel-body">
 										<form method="post" name="chngpwd" class="form-horizontal" onSubmit="return valid();">
 										

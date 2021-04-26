@@ -2,10 +2,12 @@
 session_start();
 error_reporting(0);
 include('includes/config.php');
-if (strlen($_SESSION['alogin'])==0) {
-    header('location:index.php');
-} else {
-    ?>
+if(strlen($_SESSION['alogin'])==0)
+	{	
+header('location:index.php');
+}
+else{
+	?>
 <!doctype html>
 <html lang="en" class="no-js">
 
@@ -17,7 +19,7 @@ if (strlen($_SESSION['alogin'])==0) {
 	<meta name="author" content="">
 	<meta name="theme-color" content="#3e454c">
 	
-	<title>Car</title>
+	<title>Car Rental Portal | Admin Dashboard</title>
 
 	<!-- Font awesome -->
 	<link rel="stylesheet" href="css/font-awesome.min.css">
@@ -38,10 +40,10 @@ if (strlen($_SESSION['alogin'])==0) {
 </head>
 
 <body>
-<?php include('includes/header.php'); ?>
+<?php include('includes/header.php');?>
 
 	<div class="ts-main-content">
-<?php include('includes/leftbar.php'); ?>
+<?php include('includes/leftbar.php');?>
 		<div class="content-wrapper">
 			<div class="container-fluid">
 
@@ -57,13 +59,14 @@ if (strlen($_SESSION['alogin'])==0) {
 										<div class="panel panel-default">
 											<div class="panel-body bk-primary text-light">
 												<div class="stat-panel text-center">
-<?php
+<?php 
 $sql ="SELECT id from tblusers ";
-    $query = $dbh -> prepare($sql);
-    $query->execute();
-    $results=$query->fetchAll(PDO::FETCH_OBJ);
-    $regusers=$query->rowCount(); ?>
-													<div class="stat-panel-number h1 "><?php echo htmlentities($regusers); ?></div>
+$query = $dbh -> prepare($sql);
+$query->execute();
+$results=$query->fetchAll(PDO::FETCH_OBJ);
+$regusers=$query->rowCount();
+?>
+													<div class="stat-panel-number h1 "><?php echo htmlentities($regusers);?></div>
 													<div class="stat-panel-title text-uppercase">Reg Users</div>
 												</div>
 											</div>
@@ -74,14 +77,14 @@ $sql ="SELECT id from tblusers ";
 										<div class="panel panel-default">
 											<div class="panel-body bk-success text-light">
 												<div class="stat-panel text-center">
-												<?php
+												<?php 
 $sql1 ="SELECT id from tblvehicles ";
-    $query1 = $dbh -> prepare($sql1);
-    ;
-    $query1->execute();
-    $results1=$query1->fetchAll(PDO::FETCH_OBJ);
-    $totalvehicle=$query1->rowCount(); ?>
-													<div class="stat-panel-number h1 "><?php echo htmlentities($totalvehicle); ?></div>
+$query1 = $dbh -> prepare($sql1);;
+$query1->execute();
+$results1=$query1->fetchAll(PDO::FETCH_OBJ);
+$totalvehicle=$query1->rowCount();
+?>
+													<div class="stat-panel-number h1 "><?php echo htmlentities($totalvehicle);?></div>
 													<div class="stat-panel-title text-uppercase">Listed Vehicles</div>
 												</div>
 											</div>
@@ -92,14 +95,15 @@ $sql1 ="SELECT id from tblvehicles ";
 										<div class="panel panel-default">
 											<div class="panel-body bk-info text-light">
 												<div class="stat-panel text-center">
-<?php
+<?php 
 $sql2 ="SELECT id from tblbooking ";
-    $query2= $dbh -> prepare($sql2);
-    $query2->execute();
-    $results2=$query2->fetchAll(PDO::FETCH_OBJ);
-    $bookings=$query2->rowCount(); ?>
+$query2= $dbh -> prepare($sql2);
+$query2->execute();
+$results2=$query2->fetchAll(PDO::FETCH_OBJ);
+$bookings=$query2->rowCount();
+?>
 
-													<div class="stat-panel-number h1 "><?php echo htmlentities($bookings); ?></div>
+													<div class="stat-panel-number h1 "><?php echo htmlentities($bookings);?></div>
 													<div class="stat-panel-title text-uppercase">Total Bookings</div>
 												</div>
 											</div>
@@ -110,13 +114,14 @@ $sql2 ="SELECT id from tblbooking ";
 										<div class="panel panel-default">
 											<div class="panel-body bk-warning text-light">
 												<div class="stat-panel text-center">
-<?php
+<?php 
 $sql3 ="SELECT id from tblbrands ";
-    $query3= $dbh -> prepare($sql3);
-    $query3->execute();
-    $results3=$query3->fetchAll(PDO::FETCH_OBJ);
-    $brands=$query3->rowCount(); ?>												
-													<div class="stat-panel-number h1 "><?php echo htmlentities($brands); ?></div>
+$query3= $dbh -> prepare($sql3);
+$query3->execute();
+$results3=$query3->fetchAll(PDO::FETCH_OBJ);
+$brands=$query3->rowCount();
+?>												
+													<div class="stat-panel-number h1 "><?php echo htmlentities($brands);?></div>
 													<div class="stat-panel-title text-uppercase">Listed Brands</div>
 												</div>
 											</div>
@@ -142,13 +147,14 @@ $sql3 ="SELECT id from tblbrands ";
 										<div class="panel panel-default">
 											<div class="panel-body bk-primary text-light">
 												<div class="stat-panel text-center">
-<?php
+<?php 
 $sql4 ="SELECT id from tblsubscribers ";
-    $query4 = $dbh -> prepare($sql4);
-    $query4->execute();
-    $results4=$query4->fetchAll(PDO::FETCH_OBJ);
-    $subscribers=$query4->rowCount(); ?>
-													<div class="stat-panel-number h1 "><?php echo htmlentities($subscribers); ?></div>
+$query4 = $dbh -> prepare($sql4);
+$query4->execute();
+$results4=$query4->fetchAll(PDO::FETCH_OBJ);
+$subscribers=$query4->rowCount();
+?>
+													<div class="stat-panel-number h1 "><?php echo htmlentities($subscribers);?></div>
 													<div class="stat-panel-title text-uppercase">Subscibers</div>
 												</div>
 											</div>
@@ -159,14 +165,14 @@ $sql4 ="SELECT id from tblsubscribers ";
 										<div class="panel panel-default">
 											<div class="panel-body bk-success text-light">
 												<div class="stat-panel text-center">
-												<?php
+												<?php 
 $sql6 ="SELECT id from tblcontactusquery ";
-    $query6 = $dbh -> prepare($sql6);
-    ;
-    $query6->execute();
-    $results6=$query6->fetchAll(PDO::FETCH_OBJ);
-    $query=$query6->rowCount(); ?>
-													<div class="stat-panel-number h1 "><?php echo htmlentities($query); ?></div>
+$query6 = $dbh -> prepare($sql6);;
+$query6->execute();
+$results6=$query6->fetchAll(PDO::FETCH_OBJ);
+$query=$query6->rowCount();
+?>
+													<div class="stat-panel-number h1 "><?php echo htmlentities($query);?></div>
 													<div class="stat-panel-title text-uppercase">Queries</div>
 												</div>
 											</div>
@@ -177,38 +183,37 @@ $sql6 ="SELECT id from tblcontactusquery ";
 										<div class="panel panel-default">
 											<div class="panel-body bk-info text-light">
 												<div class="stat-panel text-center">
-<?php
+<?php 
 $sql5 ="SELECT id from tbltestimonial ";
-    $query5= $dbh -> prepare($sql5);
-    $query5->execute();
-    $results5=$query5->fetchAll(PDO::FETCH_OBJ);
-    $testimonials=$query5->rowCount(); ?>
+$query5= $dbh -> prepare($sql5);
+$query5->execute();
+$results5=$query5->fetchAll(PDO::FETCH_OBJ);
+$testimonials=$query5->rowCount();
+?>
 
-													<div class="stat-panel-number h1 "><?php echo htmlentities($testimonials); ?></div>
+													<div class="stat-panel-number h1 "><?php echo htmlentities($testimonials);?></div>
 													<div class="stat-panel-title text-uppercase">Testimonials</div>
 												</div>
 											</div>
 											<a href="testimonials.php" class="block-anchor panel-footer text-center">Full Detail &nbsp; <i class="fa fa-arrow-right"></i></a>
 										</div>
 									</div>
-								
-
-									<div class="col-md-3">
+								<div class="col-md-3">
 										<div class="panel panel-default">
-											<div class="panel-body bk-info text-light">
+											<div class="panel-body bk-warning text-light">
 												<div class="stat-panel text-center">
-<?php
-$sql15 ="SELECT id from carsales ";
-    $query15= $dbh -> prepare($sql15);
-    $query15->execute();
-    $results5=$query15->fetchAll(PDO::FETCH_OBJ);
-    $carsales=$query15->rowCount(); ?>
-
-													<div class="stat-panel-number h1 "><?php echo htmlentities($tcarsales); ?></div>
-													<div class="stat-panel-title text-uppercase">Sales</div>
+<?php 
+$sql6 ="SELECT id from payments ";
+$query6= $dbh -> prepare($sql6);
+$query6->execute();
+$results6=$query6->fetchAll(PDO::FETCH_OBJ);
+$purchases=$query6->rowCount();
+?>												
+													<div class="stat-panel-number h1 "><?php echo htmlentities($purchases);?></div>
+													<div class="stat-panel-title text-uppercase">Purchases</div>
 												</div>
 											</div>
-											<a href="testimonials.php" class="block-anchor panel-footer text-center">Full Detail &nbsp; <i class="fa fa-arrow-right"></i></a>
+											<a href="manage-purchases.php" class="block-anchor panel-footer text-center">Full Detail &nbsp; <i class="fa fa-arrow-right"></i></a>
 										</div>
 									</div>
 								</div>
@@ -265,5 +270,4 @@ $sql15 ="SELECT id from carsales ";
 	</script>
 </body>
 </html>
-<?php
-} ?>
+<?php } ?>

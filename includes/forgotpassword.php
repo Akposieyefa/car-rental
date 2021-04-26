@@ -27,16 +27,16 @@ echo "<script>alert('Email id or Mobile no is invalid');</script>";
 
 ?>
   <script type="text/javascript">
-// function valid()
-// {
-// // if(document.chngpwd.newpassword.value!= document.chngpwd.confirmpassword.value)
-// // {
-// // alert("New Password and Confirm Password Field do not match  !!");
-// // document.chngpwd.confirmpassword.focus();
-// // return false;
-// // }
-// return true;
-// }
+function valid()
+{
+if(document.chngpwd.newpassword.value!= document.chngpwd.confirmpassword.value)
+{
+alert("New Password and Confirm Password Field do not match  !!");
+document.chngpwd.confirmpassword.focus();
+return false;
+}
+return true;
+}
 </script>
 <div class="modal fade" id="forgotpassword">
   <div class="modal-dialog" role="document">
