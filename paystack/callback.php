@@ -1,8 +1,23 @@
 <?php
+session_start();
+include('../includes/config.php');
+//error_reporting(0);
+
+function getPaymentKeys()
+{
+  global $dbh;
+  $sql = $dbh ->query("SELECT PaymentSecretKey, PaymentPublicKey FROM admin");
+  $results = $sql->fetchAll(PDO::FETCH_OBJ);
+  foreach ($results as $result) {
+    return $result;
+  }
+}
 
 $curl = curl_init();
+$paymentSecretKey = getPaymentKeys()->PaymentSecretKey;
 $reference = isset($_GET['reference']) ? $_GET['reference'] : '';
 if(!$reference){
+  $sql = $dbh->query("UPDATE `payments` SET `STATUS`='cancelled' WHERE `paymentReference` = '$reference'");
   die('No reference supplied');
 }
 
@@ -11,7 +26,7 @@ curl_setopt_array($curl, array(
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_HTTPHEADER => [
     "accept: application/json",
-    "authorization: Bearer sk_test_36658e3260b1d1668b563e6d8268e46ad6da3273",
+    "authorization: $paymentSecretKey",
     "cache-control: no-cache"
   ],
 ));
@@ -26,10 +41,11 @@ if($err){
 $tranx = json_decode($response);
 
 if(!$tranx->status){
+   $sql = $dbh->query("UPDATE `payments` SET `STATUS`='failed' WHERE `paymentReference` = '$reference'");
   die('API returned error: ' . $tranx->message);
 }
 
 if('success' == $tranx->data->status){
-
-  echo "<h2>Thank you for making a purchase. Your file has bee sent your email.</h2>";
+ $sql = $dbh->query("UPDATE `payments` SET `STATUS`='success' WHERE `paymentReference` = '$reference'");
+  echo "<h2>Thank you for making a purchase.</h2>";
 }
