@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 26, 2021 at 12:34 PM
+-- Generation Time: Apr 27, 2021 at 03:27 PM
 -- Server version: 10.1.9-MariaDB
 -- PHP Version: 5.6.15
 
@@ -80,9 +80,9 @@ CREATE TABLE `payments` (
 
 INSERT INTO `payments` (`ID`, `userEmail`, `VehicleId`, `IP_ADDRESS`, `access_code`, `paymentReference`, `TXN_ID`, `AMOUNT_PAID`, `AMOUNT_TO_PAY`, `CURRENCY`, `PAYMENT_TYPE`, `DESTINATION`, `CARD_first_6digits`, `CARD_last_4digits`, `CARD_issuer`, `CARD_country`, `CARD_type`, `CARD_token`, `CARD_expiry`, `STATUS`, `message`, `DATE_CREATED`, `DATE_UPDATE`) VALUES
 (1, 'test@gmail.com', 8, 0, 'mji7rbliso24u5f', '0ervlm4ofz', '979672737', NULL, '500000', NULL, NULL, 'https://checkout.paystack.com/mji7rbliso24u5f', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'confirmed', 'Deliver', '2021-04-25 19:58:49', '2021-04-26 10:12:57'),
-(2, 'test@gmail.com', 8, 0, 'is20j6dk9qbznk5', '3uci9hv449', '109591563', NULL, '500000', NULL, NULL, 'https://checkout.paystack.com/is20j6dk9qbznk5', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'initialize', 'Deliver', '2021-04-25 20:15:47', '2021-04-26 11:00:12'),
+(2, 'test@gmail.com', 8, 0, 'is20j6dk9qbznk5', '3uci9hv449', '109591563', NULL, '500000', NULL, NULL, 'https://checkout.paystack.com/is20j6dk9qbznk5', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'cancelled', 'Deliver', '2021-04-25 20:15:47', '2021-04-26 16:41:08'),
 (3, 'test@gmail.com', 8, 0, 'yitig8qqqqzt69a', 'i9lxqja14g', '117306695', NULL, '500000', NULL, NULL, 'https://checkout.paystack.com/yitig8qqqqzt69a', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'initialize', 'Deliver', '2021-04-25 20:17:26', '2021-04-26 11:00:26'),
-(4, 'test@gmail.com', 8, 0, '49736stdeazcr8a', 'kdwpqwikb5', '359295755', NULL, '500000', NULL, NULL, 'https://checkout.paystack.com/49736stdeazcr8a', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'initialize', 'Deliver', '2021-04-25 20:19:17', '2021-04-26 11:00:34');
+(4, 'test@gmail.com', 8, 0, '49736stdeazcr8a', 'kdwpqwikb5', '359295755', NULL, '500000', NULL, NULL, 'https://checkout.paystack.com/49736stdeazcr8a', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'cancelled', 'Deliver', '2021-04-25 20:19:17', '2021-04-26 16:41:45');
 
 -- --------------------------------------------------------
 
@@ -202,6 +202,38 @@ INSERT INTO `tblpages` (`id`, `PageName`, `type`, `detail`) VALUES
 (2, 'Privacy Policy', 'privacy', '<span style="color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat</span>'),
 (3, 'About Us ', 'aboutus', '<span style="color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 13.3333px;">We offer a varied fleet of cars, ranging from the compact. All our vehicles have air conditioning, &nbsp;power steering, electric windows. All our vehicles are bought and maintained at official dealerships only. Automatic transmission cars are available in every booking class.&nbsp;</span><span style="color: rgb(52, 52, 52); font-family: Arial, Helvetica, sans-serif;">As we are not affiliated with any specific automaker, we are able to provide a variety of vehicle makes and models for customers to rent.</span><div><span style="color: rgb(62, 62, 62); font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, sans-serif; font-size: 11px;">ur mission is to be recognised as the global leader in Car Rental for companies and the public and private sector by partnering with our clients to provide the best and most efficient Cab Rental solutions and to achieve service excellence.</span><span style="color: rgb(52, 52, 52); font-family: Arial, Helvetica, sans-serif;"><br></span></div>'),
 (11, 'FAQs', 'faqs', '																														<span style="color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">Address------Test &nbsp; &nbsp;dsfdsfds</span>');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblremainder`
+--
+
+CREATE TABLE `tblremainder` (
+  `id` int(11) NOT NULL,
+  `VehicleId` int(11) NOT NULL,
+  `PaymentId` int(11) NOT NULL,
+  `userEmail` varchar(255) NOT NULL,
+  `Duration` varchar(255) DEFAULT NULL,
+  `remainderTitle` varchar(255) DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `startTime` datetime DEFAULT NULL,
+  `scheduledTime` datetime DEFAULT NULL,
+  `dateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `dateUpdated` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tblremainder`
+--
+
+INSERT INTO `tblremainder` (`id`, `VehicleId`, `PaymentId`, `userEmail`, `Duration`, `remainderTitle`, `status`, `startTime`, `scheduledTime`, `dateCreated`, `dateUpdated`) VALUES
+(1, 8, 4, 'test@gmail.com', '7', 'Green-tea', 0, '2021-04-27 11:17:27', '2021-05-04 11:17:27', '2021-04-27 10:17:27', '0000-00-00 00:00:00'),
+(2, 8, 4, 'test@gmail.com', '2', 'Green-tea', 0, '2021-04-27 11:19:28', '2021-06-27 11:19:28', '2021-04-27 10:19:29', '0000-00-00 00:00:00'),
+(3, 8, 4, 'test@gmail.com', '1', 'Green-tea', 0, '2021-04-27 11:22:59', '2021-05-27 11:22:59', '2021-04-27 10:22:59', '0000-00-00 00:00:00'),
+(4, 8, 4, 'test@gmail.com', '1', 'Green-tea', 0, '2021-04-27 11:24:19', '2021-05-27 11:24:19', '2021-04-27 10:24:19', '0000-00-00 00:00:00'),
+(5, 8, 4, 'test@gmail.com', '7', 'Green-tea', 1, '2021-04-27 11:25:56', '2021-05-04 11:25:56', '2021-04-27 10:25:56', '0000-00-00 00:00:00'),
+(6, 8, 4, 'test@gmail.com', '1 year', 'Green-tea', 0, '2021-04-27 11:27:18', '2022-04-27 11:27:18', '2021-04-27 10:27:18', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -369,6 +401,12 @@ ALTER TABLE `tblpages`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tblremainder`
+--
+ALTER TABLE `tblremainder`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tblsubscribers`
 --
 ALTER TABLE `tblsubscribers`
@@ -432,6 +470,11 @@ ALTER TABLE `tblcontactusquery`
 --
 ALTER TABLE `tblpages`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+--
+-- AUTO_INCREMENT for table `tblremainder`
+--
+ALTER TABLE `tblremainder`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `tblsubscribers`
 --
