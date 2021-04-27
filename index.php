@@ -227,7 +227,7 @@ foreach($results as $result)
 
 <!--Login-Form -->
 <?php include('includes/login.php');?>
-<!--/Login-Form --> 
+<!--/Login-Form -->
 
 <!--Register-Form -->
 <?php include('includes/registration.php');?>

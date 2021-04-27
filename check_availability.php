@@ -1,5 +1,17 @@
 <?php 
 require_once("includes/config.php");
+
+
+switch ($_POST['action']) {
+	case 'remainder':
+		setRemainder();
+		break;
+
+	default:
+		# code...
+		break;
+}
+
 // code user email availablity
 if(!empty($_POST["emailid"])) {
 	$email= $_POST["emailid"];
@@ -26,5 +38,29 @@ echo "<span style='color:red'> Email already exists .</span>";
 }
 }
 
+function setRemainder(){
+	global $dbh;
+	$arr = explode(" ", $_POST["interval"]);
+	$time = time();
+	$startTime =  date('Y-m-d H:i:s', $time);
 
-?>
+	$timestamp=strtotime($_POST["interval"]);
+	$scheduledTime =  date('Y-m-d H:i:s', $timestamp);
+
+	if (!isset($_POST["myonoffswitchtrue"])) {
+		$isChecked = 0;
+	}
+	else{
+		$isChecked = 1;
+	}
+	  $sql = $dbh->query("INSERT INTO `tblremainder` (`VehicleId`, `PaymentId`, `userEmail`, `Duration`, `remainderTitle`, `status`, `startTime`, `scheduledTime`) VALUES ('{$_POST["vid"]}', '{$_POST["paymentId"]}', '{$_POST["userEmail"]}', '{$_POST["interval"]}', '{$_POST["title"]}', '$isChecked', '$startTime', '$scheduledTime')");
+	  $lastInsertId = $dbh->lastInsertId();
+
+	if ($lastInsertId) {
+		$data =array(
+	 		"status" => 200,
+	 		"message" => 'Success: remainder set successfully!');
+		echo json_encode($data);
+	}
+}
+

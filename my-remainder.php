@@ -11,8 +11,8 @@ else{
   if(isset($_REQUEST['eid']))
   {
 $eid=intval($_REQUEST['eid']);
-$status="cancelled";
-$sql = "UPDATE payments SET STATUS=:status WHERE ID=:eid";
+$status=0;
+$sql = "UPDATE tblremainder SET status=:status WHERE id=:eid";
 $query = $dbh->prepare($sql);
 $query -> bindParam(':status',$status, PDO::PARAM_STR);
 $query-> bindParam(':eid',$eid);
@@ -25,7 +25,7 @@ $msg="Purchase Successfully Cancelled";
 <html lang="en">
 <head>
 
-<title>Car Rental Portal - My Purchases</title>
+<title>Car Rental Portal - My Remainder</title>
 <!--Bootstrap -->
 <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css">
 <!--Custome Style -->
@@ -80,11 +80,11 @@ $msg="Purchase Successfully Cancelled";
   <div class="container">
     <div class="page-header_wrap">
       <div class="page-heading">
-        <h1>My Purchases</h1>
+        <h1>My Remainder</h1>
       </div>
       <ul class="coustom-breadcrumb">
         <li><a href="#">Home</a></li>
-        <li>My Purchases</li>
+        <li>My Remainder</li>
       </ul>
     </div>
   </div>
@@ -123,12 +123,12 @@ foreach($results as $result)
    
       <div class="col-md-8 col-sm-8">
         <div class="profile_wrap">
-          <h5 class="uppercase underline">My Order </h5>
+          <h5 class="uppercase underline">My Remainder </h5>
           <div class="my_vehicles_list">
             <ul class="vehicle_listing">
 <?php 
 $useremail=$_SESSION['login'];
- $sql = "SELECT tblvehicles.Vimage1 as Vimage1,tblvehicles.VehiclesTitle,tblvehicles.id as vid,tblbrands.BrandName,payments.id,payments.DATE_CREATED,payments.TXN_ID,payments.AMOUNT_TO_PAY,payments.STATUS from payments join tblvehicles on payments.VehicleId=tblvehicles.id join tblbrands on tblbrands.id=tblvehicles.VehiclesBrand where payments.userEmail=:useremail";
+ $sql = "SELECT `tblremainder`.*, `tblvehicles`.`Vimage1` as `Vimage1`,`tblvehicles`.`VehiclesTitle`,`tblvehicles`.`id` as `vid`,`tblbrands`.`BrandName` from `tblremainder` join `tblvehicles` on `tblremainder`.`VehicleId`=`tblvehicles`.`id` join `tblbrands` on `tblbrands`.`id`=`tblvehicles`.`VehiclesBrand` where `tblremainder`.`userEmail`=:useremail";
 $query = $dbh -> prepare($sql);
 $query-> bindParam(':useremail', $useremail, PDO::PARAM_STR);
 $query->execute();
@@ -140,64 +140,31 @@ foreach($results as $result)
 {  ?>
 
 <li>
-    <h4 style="color:red">Txn No #<?php echo htmlentities($result->TXN_ID);?></h4>
-                <div class="vehicle_img"> <a href="vehical-details.php?vhid=<?php echo htmlentities($result->vid);?>"><img src="admin/img/vehicleimages/<?php echo htmlentities($result->Vimage1);?>" alt="image"></a> </div>
+    <h4 style="color:red">Title #<?php echo htmlentities($result->remainderTitle);?></h4>
+                <div class="vehicle_img"><img src="admin/img/vehicleimages/<?php echo htmlentities($result->Vimage1);?>" alt="image"> </div>
                 <div class="vehicle_title">
 
-                  <h6><a href="vehical-details.php?vhid=<?php echo htmlentities($result->vid);?>"> <?php echo htmlentities($result->BrandName);?> , <?php echo htmlentities($result->VehiclesTitle);?></a></h6>
-                  <p><b>From </b> <?php echo htmlentities($result->FromDate);?> <b>To </b> <?php echo htmlentities($result->ToDate);?></p>
-                  <div style="float: left"><p><b>Message:</b> <?php echo htmlentities($result->message);?> </p></div>
+                  <h6><a href="#"> <?php echo htmlentities($result->BrandName);?> , <?php echo htmlentities($result->VehiclesTitle);?></a></h6>
+                  <p><b>Duration </b> <?php echo htmlentities($result->Duration);?> <b>Start Date </b> <?php echo htmlentities($result->startTime);?></p>
+                  <div style="float: left"><p><b>Schedule Remainder:</b> <?php echo htmlentities($result->scheduledTime);?> </p></div>
                 </div>
-                <?php if($result->STATUS=='confirmed')
+                <?php if($result->status==1)
                 { ?>
-                <div class="vehicle_status"> <a href="#" class="btn outline btn-xs active-btn">Confirmed</a>
+                <div class="vehicle_status"> <a href="#" class="btn outline btn-xs active-btn">Active</a>
                            <div class="clearfix"></div>
-        </div><br>
-        <div class="vehicle_status"> <a class="btn outline btn-xs info-btn" href="#remainderform" data-toggle="modal" data-dismiss="modal">Advance Setup</a>
-                           <div class="clearfix"></div>
-        </div>
+        		</div>
 
-              <?php } else if($result->STATUS=='cancelled') { ?>
- <div class="vehicle_status"> <a href="#" class="btn outline btn-xs">Cancelled</a>
+              <?php } else if($result->status==0) { ?>
+ <div class="vehicle_status"> <a href="#" class="btn outline btn-xs">Inactive</a>
             <div class="clearfix"></div>
         </div>
              
 
-
-                <?php } else { ?>
- <div class="vehicle_status"> <span class="btn outline btn-xs">Not Confirm yet</span>
-            <div class="clearfix"></div>
-        </div><br><br>
-    <div class="vehicle_status"><a class="btn outline btn-xs warning-btn" href="my-order.php?eid=<?php echo htmlentities($result->id);?>" onclick="return confirm('Do you really want to Cancel this Booking')"> Cancel Purchase</a>
-            <div class="clearfix"></div>
-        </div>
-                <?php } ?>
-
               </li>
-
-<h5 style="color:blue">Invoice</h5>
-<table>
-  <tr>
-    <th>Car Name</th>
-    <th>Trx ID</th>
-    <th>Order Date</th>
-    <th>Amount</th>
-  </tr>
-  <tr>
-    <td><?php echo htmlentities($result->VehiclesTitle);?>, <?php echo htmlentities($result->BrandName);?></td>
-     <td><?php echo htmlentities($result->TXN_ID);?></td>
-     <td><?php echo htmlentities($result->DATE_CREATED);?></td>
-      <td> <?php echo htmlentities($result->AMOUNT_TO_PAY);?></td>
-  </tr>
-  <tr>
-    <th colspan="3" style="text-align:center;"> Grand Total</th>
-    <th><?php echo htmlentities($result->AMOUNT_TO_PAY);?></th>
-  </tr>
-</table>
 <hr />
-              <?php }}  else { ?>
-                <h5 align="center" style="color:red">No Purchase yet</h5>
-              <?php } ?>
+              <?php }  else { ?>
+                <h5 align="center" style="color:red">No Remainder yet</h5>
+              <?php } }} ?>
              
          
             </ul>

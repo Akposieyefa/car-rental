@@ -1,4 +1,48 @@
+<?php
+if (isset($_SESSION['login'])) {
+  resetRemainder();
+}
 
+function resetRemainder() {
+  global $dbh;
+  $sql = $dbh->query("SELECT id,Duration, scheduledTime FROM `tblremainder` WHERE `userEmail`='{$_SESSION["login"]}'");
+  $results = $sql->fetchAll(PDO::FETCH_OBJ);
+  foreach ($results as $result) {
+    $id = $result->id;
+    $scheduledTime = $result->scheduledTime;
+    $time = time();
+    $now =  date('Y-m-d H:i:s', $time);
+
+    if ($scheduledTime == $now) {
+      $timestamp=strtotime($result->Duration);
+      $scheduledTime =  date('Y-m-d H:i:s', $timestamp);
+      $sql = $dbh->query("UPDATE `tblremainder` SET `scheduledTime`='$scheduledTime' WHERE `id`='$id'");
+    }
+  }
+  
+}
+
+function checkRemainder() {
+  global $dbh;
+  $sql = $dbh->query("SELECT remainderTitle,Duration,status FROM `tblremainder` WHERE `userEmail`='{$_SESSION["login"]}' AND `status`=1");
+  if ($sql->rowCount()>0) {
+    $results = $sql->fetchAll(PDO::FETCH_OBJ);
+    foreach ($results as $result) {
+
+     echo $result->remainderTitle. ": every"." ".$result->Duration. " is <b>Active</b>";
+    }
+    //Remainder exist
+  }
+}
+
+function countRemainder() {
+  global $dbh;
+  $sql = $dbh->query("SELECT count(*) FROM `tblremainder` WHERE `userEmail`='{$_SESSION["login"]}' AND `status`=1");
+  $result = $sql->fetchColumn();
+  return $result;
+}
+
+?>
 <header>
   <div class="default-header">
     <div class="container">
@@ -55,6 +99,16 @@ echo "Welcome To Car rental portal";
       <div class="header_wrap">
         <div class="user_login">
           <ul>
+            <?php
+if (isset($_SESSION['login'])) {
+  $res = countRemainder();
+  ?>
+  <li class="nav-item"><a href="#remainderBox" data-toggle="modal" data-dismiss="modal"><i class="fa fa-bell"></i><span class="badge badge-sm badge-danger"><?php echo $res; ?></span></a></li>
+<?php
+  
+}
+?>
+            
             <li class="dropdown"> <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle" aria-hidden="true"></i> 
 <?php 
 $email=$_SESSION['login'];
@@ -76,6 +130,7 @@ foreach($results as $result)
               <li><a href="update-password.php">Update Password</a></li>
             <li><a href="my-booking.php">My Booking</a></li>
             <li><a href="my-order.php">My Purchases</a></li>
+            <li><a href="my-remainder.php">My Remainder</a></li>
             <li><a href="post-testimonial.php">Post a Testimonial</a></li>
           <li><a href="my-testimonials.php">My Testimonial</a></li>
             <li><a href="logout.php">Sign Out</a></li>
@@ -105,5 +160,32 @@ foreach($results as $result)
     </div>
   </nav>
   <!-- Navigation end --> 
-  
 </header>
+<div class="modal fade" id="remainderBox" role="dialog" data-keyboard="false" data-backdrop="static">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="signup_wrap">
+            <div class="col-md-12 col-sm-6">
+              <?php if (isset($_SESSION['login'])) {
+                
+                ?>
+                <ul class="list-group">
+                <li class="list-group-item active"><?php echo $res = checkRemainder(); ?></li>
+              </ul>
+              <?php
+              }
+              ?>
+              
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
