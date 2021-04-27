@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 27, 2021 at 03:27 PM
+-- Generation Time: Apr 27, 2021 at 03:47 PM
 -- Server version: 10.1.9-MariaDB
 -- PHP Version: 5.6.15
 
@@ -73,16 +73,6 @@ CREATE TABLE `payments` (
   `DATE_CREATED` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `DATE_UPDATE` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `payments`
---
-
-INSERT INTO `payments` (`ID`, `userEmail`, `VehicleId`, `IP_ADDRESS`, `access_code`, `paymentReference`, `TXN_ID`, `AMOUNT_PAID`, `AMOUNT_TO_PAY`, `CURRENCY`, `PAYMENT_TYPE`, `DESTINATION`, `CARD_first_6digits`, `CARD_last_4digits`, `CARD_issuer`, `CARD_country`, `CARD_type`, `CARD_token`, `CARD_expiry`, `STATUS`, `message`, `DATE_CREATED`, `DATE_UPDATE`) VALUES
-(1, 'test@gmail.com', 8, 0, 'mji7rbliso24u5f', '0ervlm4ofz', '979672737', NULL, '500000', NULL, NULL, 'https://checkout.paystack.com/mji7rbliso24u5f', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'confirmed', 'Deliver', '2021-04-25 19:58:49', '2021-04-26 10:12:57'),
-(2, 'test@gmail.com', 8, 0, 'is20j6dk9qbznk5', '3uci9hv449', '109591563', NULL, '500000', NULL, NULL, 'https://checkout.paystack.com/is20j6dk9qbznk5', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'cancelled', 'Deliver', '2021-04-25 20:15:47', '2021-04-26 16:41:08'),
-(3, 'test@gmail.com', 8, 0, 'yitig8qqqqzt69a', 'i9lxqja14g', '117306695', NULL, '500000', NULL, NULL, 'https://checkout.paystack.com/yitig8qqqqzt69a', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'initialize', 'Deliver', '2021-04-25 20:17:26', '2021-04-26 11:00:26'),
-(4, 'test@gmail.com', 8, 0, '49736stdeazcr8a', 'kdwpqwikb5', '359295755', NULL, '500000', NULL, NULL, 'https://checkout.paystack.com/49736stdeazcr8a', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'cancelled', 'Deliver', '2021-04-25 20:19:17', '2021-04-26 16:41:45');
 
 -- --------------------------------------------------------
 
@@ -222,18 +212,6 @@ CREATE TABLE `tblremainder` (
   `dateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `dateUpdated` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tblremainder`
---
-
-INSERT INTO `tblremainder` (`id`, `VehicleId`, `PaymentId`, `userEmail`, `Duration`, `remainderTitle`, `status`, `startTime`, `scheduledTime`, `dateCreated`, `dateUpdated`) VALUES
-(1, 8, 4, 'test@gmail.com', '7', 'Green-tea', 0, '2021-04-27 11:17:27', '2021-05-04 11:17:27', '2021-04-27 10:17:27', '0000-00-00 00:00:00'),
-(2, 8, 4, 'test@gmail.com', '2', 'Green-tea', 0, '2021-04-27 11:19:28', '2021-06-27 11:19:28', '2021-04-27 10:19:29', '0000-00-00 00:00:00'),
-(3, 8, 4, 'test@gmail.com', '1', 'Green-tea', 0, '2021-04-27 11:22:59', '2021-05-27 11:22:59', '2021-04-27 10:22:59', '0000-00-00 00:00:00'),
-(4, 8, 4, 'test@gmail.com', '1', 'Green-tea', 0, '2021-04-27 11:24:19', '2021-05-27 11:24:19', '2021-04-27 10:24:19', '0000-00-00 00:00:00'),
-(5, 8, 4, 'test@gmail.com', '7', 'Green-tea', 1, '2021-04-27 11:25:56', '2021-05-04 11:25:56', '2021-04-27 10:25:56', '0000-00-00 00:00:00'),
-(6, 8, 4, 'test@gmail.com', '1 year', 'Green-tea', 0, '2021-04-27 11:27:18', '2022-04-27 11:27:18', '2021-04-27 10:27:18', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -444,7 +422,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tblbooking`
 --
@@ -474,7 +452,7 @@ ALTER TABLE `tblpages`
 -- AUTO_INCREMENT for table `tblremainder`
 --
 ALTER TABLE `tblremainder`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tblsubscribers`
 --
